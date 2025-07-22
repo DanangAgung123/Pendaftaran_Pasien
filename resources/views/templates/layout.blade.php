@@ -179,7 +179,7 @@
                 <li class="nav-item" style="">
                   <a href="{{ route('pasien.home') }}" class="nav-link">
                     {{-- <i class="nav-icon bi bi-palette"></i> --}}
-                    <p>Data Diri</p>
+                    <p>Pendaftaran Kesehatan</p>
                   </a>
                 </li>
                 {{-- <li class="nav-item">
@@ -200,7 +200,7 @@
                 <li class="nav-item">
                   <a href="{{ route('pasien.pendaftaran') }}" class="nav-link">
                     {{-- <i class="nav-icon bi bi-download"></i> --}}
-                    <p>Pendaftaran Online</p>
+                    <p>Data Diri</p>
                   </a>
                 </li>
                 <li class="nav-item">

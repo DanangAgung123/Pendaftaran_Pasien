@@ -43,9 +43,11 @@ Route::get('/admin/sapaan', [AdminController::class, 'sapaan'])->name('admin.sap
 Route::get('/admin/kota', [AdminController::class, 'kota'])->name('admin.kota');
 Route::get('/admin/dataPasien', [AdminController::class, 'dataPasien'])->name('admin.dataPasien');
 Route::get('/admin/dataPendaftaran', [AdminController::class, 'dataPendaftaran'])->name('admin.dataPendaftaran');
+Route::get('/admin/laporanReservasi', [AdminController::class, 'laporanReservasi'])->name('admin.laporanReservasi');
 Route::get('/admin/rubahPendaftaran', [AdminController::class, 'rubahPendaftaran'])->name('admin.rubahPendaftaran');
 Route::put('/admin/konfirmasiPendaftaran/{daftar:id}', [AdminController::class, 'konfirmasiPendaftaran'])->name('admin.konfirmasiPendaftaran');
 // Route::post('/admin/dataPendaftaran', [AdminController::class, 'dataPendaftaran'])->name('admin.dataPendaftaran');
+Route::post('/admin/cetakLaporan', [AdminController::class, 'cetakLaporan'])->name('admin.cetakLaporan');
 Route::post('/admin/store', [AdminController::class, 'store'])->name('admin.store');
 Route::post('/admin/storeBerita', [AdminController::class, 'storeBerita'])->name('admin.storeBerita');
 Route::post('/admin/storeDokter', [AdminController::class, 'storeDokter'])->name('admin.storeDokter');
@@ -82,14 +84,14 @@ Route::get('/admin/exportReservasi',[AdminController::class, 'exportReservasi'])
 Route::get('/admin/exportPasien',[AdminController::class, 'exportPasien'])->name('admin.exportPasien');
 
 
-Route::get('/pasien/home', [PasienController::class, 'index'])->name('pasien.home');
+Route::get('/pasien/home', [PasienController::class, 'pendaftaran'])->name('pasien.home');
 Route::get('/pasien/datadiri', [PasienController::class, 'datadiri'])->name('pasien.datadiri');
 Route::get('/pasien/jadwalDokter', [PasienController::class, 'jadwalDokter'])->name('pasien.jadwalDokter');
 Route::get('/pasien/skriningMandiri', [PasienController::class, 'skriningMandiri'])->name('pasien.skriningMandiri');
 Route::get('/pasien/statusAntrian', [PasienController::class, 'statusAntrian'])->name('pasien.statusAntrian');
 Route::get('/pasien/cetakAntrian/{antri:uuid}', [PasienController::class, 'cetakAntrian'])->name('pasien.cetakAntrian');
 Route::get('/pasien/riwayatPeriksa', [PasienController::class, 'riwayatPeriksa'])->name('pasien.riwayatPeriksa');
-Route::get('/pasien/pendaftaran', [PasienController::class, 'pendaftaran'])->name('pasien.pendaftaran');
+Route::get('/pasien/pendaftaran', [PasienController::class, 'index'])->name('pasien.pendaftaran');
 Route::post('/pasien/storePendaftaran', [PasienController::class, 'storePendaftaran'])->name('pasien.storePendaftaran');
 Route::post('/pasien/pendaftaran1', [PasienController::class, 'pendaftaran1'])->name('pasien.pendaftaran1');
 Route::post('/pasien/Pendaftaran2', [PasienController::class, 'Pendaftaran2'])->name('pasien.Pendaftaran2');

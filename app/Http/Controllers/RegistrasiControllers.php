@@ -30,8 +30,12 @@ class RegistrasiControllers extends Controller
                                 ->select('dokter_id')
                                 ->groupByRaw('dokter_id')
                                 ->get();
-        // dump($jadwal);
-        return view('dashboard', compact('dokter','berita','poli','jadwal'));
+        $today = date('Y-m-d');
+        $jadwalskr = JadwalDokter::where('praktek', '1')
+                                ->where('tgl', $today)
+                                ->get();
+        // dump($today);
+        return view('dashboard', compact('dokter','berita','poli','jadwal','jadwalskr'));
     }
 
     public function index()

@@ -48,8 +48,25 @@
         <td>Sore {{ $daftar->jadwaldokter->mulai }} - {{ $daftar->jadwaldokter->selesai }}</td>
       @endif
     </tr>
+    {{-- <tr><br></tr>
+    <tr><br></tr> --}}
+    {{-- <tr style="text-align: center">
+      <td colspan="2"><h4>Rumah Sakit Ibu Dan Anak AMANAH Probolinggo</h4></td>
+    </tr>
+    <tr style="text-align: center; margin-bottom: -30px;">
+      <td colspan="2"><p>Jl. Dr. Moch Saleh No.43 Probolinggo</p></td>
+    </tr>
+    <tr style="text-align: center; margin-top: 10px;">
+      <td colspan="2"><p>Call Center (0335) 423487. Info & Pendaftaran 0853-3457-4169</p></td>
+    </tr> --}}
   </table>
   @endforeach
+  <br>
+    <div style="text-align: center">
+      <h4>Rumah Sakit Ibu Dan Anak AMANAH Probolinggo</h4>
+      <p>Jl. Dr. Moch Saleh No.43 Probolinggo</p>
+      <p>Call Center (0335) 423487. Info & Pendaftaran 0853-3457-4169</p>
+    </div>
   
 
     {{-- <div class="container">

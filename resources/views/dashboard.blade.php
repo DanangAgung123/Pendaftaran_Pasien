@@ -160,7 +160,25 @@
             </div>
         </div>
         @endforeach
-        
+        <div class="row text-center mb-3">
+        <div class="col">
+          <h3>JADWAL DOKTER HARI INI</h3>
+        </div>
+      </div>
+        <div class="row  mb-3">
+          @foreach ($jadwalskr as $skr )
+        <div class="col-lg-12">
+          <table class="table">
+            <td style="width: 25%">{{ $skr->dokter->nama }}</td>
+            <td style="width: 25%">{{ $skr->poli->namaunit }}</td>
+            <td class="text-center">{{ $skr->mulai }}</td>
+            <td class="text-center">{{ $skr->selesai }}</td>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+        @endforeach
+      </div>
       </div>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">

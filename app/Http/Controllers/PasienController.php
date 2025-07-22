@@ -112,22 +112,20 @@ class PasienController extends Controller
 
     public function pendaftaran()
     {
-        // $username = session('pasien')['0']['username'];
-        // $pasien = Pasien::where('username',$username)
-        // ->get();
-        // $sapaan =  session('pasien')['0']['sapaan'];
-        // $ids = Sapaan::where('nama',$sapaan)
-        //     ->select('Poli_id')
-        //     ->get();
-        // $id = $ids[0]->Poli_id;
-        // session()->put('unit_id',$id);
-        // $polis = DB::table('poli')
-        // ->where('id','=',$id)
-        // ->orWhere('id','=','3')
-        // ->get();
-        $sapaan =  session('pasien')['0']['sapaan'];
-        $data = Sapaan::where('nama',$sapaan)
-            ->get();
+        $username = session('pasien')['0']['noktp'];
+        $pasien = Pasien::where('noktp',$username)
+                ->get();
+        $antri = ReservasiOnline::where('pasien_id', $pasien[0]->id)
+                                ->where('is_called',0)
+                                ->first();
+        if($antri === null) {
+            $sapaan =  session('pasien')['0']['sapaan'];
+            $data = Sapaan::where('nama',$sapaan)
+                        ->get();
+        } else {
+            $data = 0;
+        }
+        
         return view('pasiens.pendaftaran',compact('data'));
     }
     public function pendaftaran1(Request $request)
@@ -219,7 +217,7 @@ class PasienController extends Controller
             'is_called' => 0
         ]);
 
-        return redirect()->route('pasien.pendaftaran')->with('sukses', 'Pendaftaran Anda berhasil dilakukan');
+        return redirect()->route('pasien.home')->with('sukses', 'Pendaftaran Anda berhasil dilakukan');
 
     }
 

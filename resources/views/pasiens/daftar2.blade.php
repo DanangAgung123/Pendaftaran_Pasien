@@ -58,7 +58,7 @@
                             </tbody>
                             @endforeach
                         </table>
-                  
+                  <a href="{{ route('pasien.home') }}" class="btn btn-danger">Batal</a>
               </div>
             </div>
             <!-- /.row (main row) -->

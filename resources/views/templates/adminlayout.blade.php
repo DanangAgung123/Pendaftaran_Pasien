@@ -249,6 +249,15 @@
                   <hr>
                 </li>
                 <li class="nav-item">
+                  <a href="{{ route('admin.laporanReservasi') }}" class="nav-link">
+                    {{-- <i class="nav-icon bi bi-download"></i> --}}
+                    <p>Laporan Reservasi</p>
+                  </a>
+                </li>
+                <li class="nav-header">
+                  <hr>
+                </li>
+                <li class="nav-item">
                   <a href="{{ route('admin.logout') }}" class="nav-link" >
                     {{-- <i class="nav-icon bi bi-star-half"></i> --}}
                     <p>Keluar</p>

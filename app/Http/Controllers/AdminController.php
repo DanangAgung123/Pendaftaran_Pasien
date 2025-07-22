@@ -16,6 +16,7 @@ use App\Models\JadwalDokter;
 use Illuminate\Http\Request;
 use App\Exports\PasienExport;
 use App\Models\ReservasiOnline;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\ReservasiExport;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User;
@@ -29,7 +30,7 @@ class AdminController extends Controller
      */
     public function exportReservasi() 
     {
-        return Excel::download(new ReservasiExport, 'reservasi.xlsx');
+        
     }
     public function exportPasien() 
     {
@@ -119,7 +120,69 @@ class AdminController extends Controller
          $data = Pasien::all();
          return view('admins.dataPasien',compact('data'));
      }
-     
+     public function laporanReservasi()
+     {
+        // $tanggal = ReservasiOnline::select('tgl_daftar')
+        //                         ->groupByRaw('tgl_daftar')
+        //                         ->get();
+
+        $koneksi = mysqli_connect('localhost', 'root', '', 'amanah');
+        $tahun = mysqli_query($koneksi, "SELECT YEAR(tgl_daftar) FROM reservasi_online GROUP BY YEAR(tgl_daftar) ");
+        $th = mysqli_fetch_all($tahun);
+        $koneksi = mysqli_connect('localhost', 'root', '', 'amanah');
+        $bulan = mysqli_query($koneksi, "SELECT MONTH(tgl_daftar) FROM reservasi_online GROUP BY MONTH(tgl_daftar)");
+        $bl = mysqli_fetch_all($bulan);
+        
+         return view('admins.laporanReservasi',compact('th','bl'));
+     }
+
+     public function cetakLaporan(Request $request)
+     {
+        $bl = $request->bl;
+        $th = $request->th;
+
+        if ($bl<10) {
+            $tgl1 = $th.'-'.'0'.$bl.'-'.'01';
+            $tgl2 = $th.'-'.'0'.$bl.'-'.'31';
+        } else {
+            $tgl1 = $th.'-'.$bl.'-'.'01';
+            $tgl2 = $th.'-'.$bl.'-'.'31';
+        }
+
+        if($bl == 1) {
+            $bulan = "Januari";
+        } if($bl == 2) {
+            $bulan = "Februari";
+        } if($bl == 3) {
+            $bulan = "Maret";
+        } if($bl == 4) {
+            $bulan = "April";
+        } if($bl == 5) {
+            $bulan = "Mei";
+        } if($bl == 6) {
+            $bulan = "Juni";
+        } if($bl == 7) {
+            $bulan = "Juli";
+        } if($bl == 8) {
+            $bulan = "Agustus";
+        } if($bl == 9) {
+            $bulan = "September";
+        } if($bl == 10) {
+            $bulan = "Oktober";
+        } if($bl == 11) {
+            $bulan = "November";
+        } if($bl == 12) {
+            $bulan = "Desember";
+        }
+
+        $reservasi = ReservasiOnline::whereBetween('tgl_daftar', [$tgl1,$tgl2])
+                                    ->get();
+        // dd($reservasi);
+        $filename = date('Y-m-d H:i:s');
+        $pdf = Pdf::loadView('cetaks.cetakReservasi', compact('reservasi','bulan'))->setPaper('a4','portrait');
+        return $pdf->stream('Reservasi.pdf');
+     }
+
      public function dataPendaftaran(Request $request)
      {
         $data = ReservasiOnline::all();
@@ -409,7 +472,7 @@ class AdminController extends Controller
     public function updateBerita(Request $request, Berita $berita)
     {
         // dd($request);
-        if(empty($request->foto))
+        if(empty($request->gambar))
         {
             $berita->update([
                 'judul' => $request->judul,
@@ -419,7 +482,7 @@ class AdminController extends Controller
             $berita->update([
                 'judul' => $request->judul,
                 'keterangan' => $request->keterangan,
-                'gambar' => $request->file('fambar')->store()
+                'gambar' => $request->file('gambar')->store()
             ]);
         }
 

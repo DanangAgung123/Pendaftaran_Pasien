@@ -58,6 +58,24 @@
                 </div>
              </div>
              <div class="row" style="justify-content: center">
+              @if ($data === 0)
+                <div class="col-lg-4">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <h3>Informasi Pendaftaran</h3>
+                        </div>
+                        <div class="card-body">
+                          <p class="card-text">Anda Masih Memiliki Antrian Yang harus dilakukan</p>
+                          <form action="{{ route('pasien.pendaftaran1')}}" method="POST">
+                            @csrf
+                          {{-- <input type="text" hidden value="{{ $pasien[0]->username }}" id="username" name="username"> --}}
+                          {{-- <input type="text" hidden value="{{ $poli->id }}" id="poli_id" name="poli_id">
+                          <button type="submit" class="btn btn-primary" >Daftar</button> --}}
+                          </form>
+                        </div>
+                      </div>
+                </div>
+              @else
                 @foreach ($data[0]->polis as $poli)
                 <div class="col-lg-4">
                     <div class="card text-center">
@@ -76,6 +94,8 @@
                       </div>
                 </div>
                 @endforeach
+              @endif
+                
 
              </div>
            </div>

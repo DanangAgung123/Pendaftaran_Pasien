@@ -80,7 +80,10 @@
                           @enderror
                       </div>
                       <div class="mb-3">
-                        <button class="btn btn-primary" type="submit">Daftarkan</button>
+                        <span>
+                          <button class="btn btn-primary" type="submit">Daftarkan</button>
+                          <a href="{{ route('pasien.home') }}" class="btn btn-danger">Batal</a>
+                        </span>
                       </div>
                     @endforeach
                 </form>
